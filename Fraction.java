@@ -39,5 +39,17 @@ public class Fraction
         return denominator;
     }
     
+    public String toString()
+    {
+        String numer = String.valueof(numerator);
+        String denom = String.valueof(denominator);
+        return numer + "/" + denom;
+    }
+    
+    public double toDouble()
+    {
+        return((double) numerator / denominator);
+    }
+    
     
 }

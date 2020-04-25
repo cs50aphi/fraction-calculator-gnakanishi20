@@ -69,10 +69,31 @@ public class Fraction
         //returning a fraction?
         Fraction finalFraction = new Fraction(num2, denom2);
         finalFraction.toLowestTerms();
-        return finalFraction ;
+        return finalFraction;
     }
     
+    public Fraction multiply()
+    {
+        int denom2 = obj.getDenominator() * denominator;
+        int num2 = numerator * obj.getNumerator();
+        Fraction finalFraction = new Fraction(num2, denom2);
+        finalFraction.toLowestTerms();
+        return finalFraction;
+    }
     
+    public Fraction divide()
+    {
+        int num2 = obj.getDenominator() * numerator;
+        int denom2 = denominator * obj.getNumerator();
+        Fraction finalFraction = new Fraction(num2, denom2);
+        finalFraction.toLowestTerms();
+        return finalFraction;
+    }
+    
+    public Fraction equals(Fraction obj)
+    {
+        
+    }
     
     public void toLowestTerms()
     {

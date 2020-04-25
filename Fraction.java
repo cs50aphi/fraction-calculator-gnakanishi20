@@ -3,23 +3,23 @@ public class Fraction
     int numerator;
     int denominator;
     
-    public Fraction(int n1, int d1)
+    public Fraction(int n, int d)
     {
-        if(int d1 < 0)
+        if(d < 0 && n > 0)
         {
-            numerator = n1 * -1;
-            denominator = d1 * -1;
+            numerator = n * -1;
+            // denominator = d * -1;
         }
         else
         {
-            numerator = n1;
-            denominator = d1;
+            numerator = n;
+            denominator = d;
         }
     }
     
-    public Fraction(int n1)
+    public Fraction(int n)
     {
-        numerator = n1;
+        numerator = n;
         denominator = 0;
     }
     
@@ -41,8 +41,8 @@ public class Fraction
     
     public String toString()
     {
-        String numer = String.valueof(numerator);
-        String denom = String.valueof(denominator);
+        String numer = String.valueOf(numerator);
+        String denom = String.valueOf(denominator);
         return numer + "/" + denom;
     }
     
@@ -51,5 +51,42 @@ public class Fraction
         return((double) numerator / denominator);
     }
     
+    public Fraction add(Fraction obj)
+    {
+        int denom2 = obj.getDenominator() * denominator;
+        int num2 = obj.getDenominator() * numerator + obj.getNumerator() * denominator;
+        //returning a fraction?
+        Fraction finalFraction = new Fraction(num2, denom2);
+        finalFraction.toLowestTerms();
+        return finalFraction;
+    }
     
+    public Fraction subtract(Fraction obj)
+    {
+        int denom2 = obj.getDenominator() * denominator;
+        // order now matters so the first numerator has to come first
+        int num2 = (obj.getDenominator() * numerator) - (obj.getNumerator() * denominator);
+        //returning a fraction?
+        Fraction finalFraction = new Fraction(num2, denom2);
+        finalFraction.toLowestTerms();
+        return finalFraction ;
+    }
+    
+    
+    
+    public void toLowestTerms()
+    {
+        int divide = gcd(numerator, denominator);
+        numerator = numerator / divide;
+        denominator = denominator / divide;
+    }
+    
+    public static int gcd(int a, int b)
+    {
+        if(a % b == 0)
+        {
+            return b;
+        }
+        return gcd(b, a % b);
+    }
 }

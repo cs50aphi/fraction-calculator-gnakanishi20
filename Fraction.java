@@ -116,7 +116,7 @@ public class Fraction
     
     public void toLowestTerms()
     {
-        int divide = gcd(numerator, denominator);
+        int divide = Math.abs(gcd(numerator, denominator));
         numerator = numerator / divide;
         denominator = denominator / divide;
     }

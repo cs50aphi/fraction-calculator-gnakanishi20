@@ -5,16 +5,26 @@ public class Fraction
     
     public Fraction(int n, int d)
     {
-        if(d < 0 && n > 0)
+        if(d < 0)
         {
+            n = -n;
+            d = d * -1;
+            numerator = n;
+            denominator = d;
+        }
+        else if(n < 0 && d < 0)
+        {
+            n = +n;
+            d = +d;
             numerator = n * -1;
-            // denominator = d * -1;
+            denominator = d * -1;
         }
         else
         {
             numerator = n;
             denominator = d;
         }
+        
     }
     
     public Fraction(int n)
@@ -92,7 +102,12 @@ public class Fraction
     
     public boolean equals(Fraction obj)
     {
-        if(numerator == obj.getNumerator() && denominator == obj.getDenominator())
+        //makes sure it prints out the real fraction instead of the reduced one
+        Fraction simple = new Fraction(obj.getNumerator(), obj.getDenominator());
+        simple.toLowestTerms();
+        Fraction simple2 = new Fraction(numerator, denominator);
+        simple2.toLowestTerms();
+        if(simple2.getNumerator() == simple.getNumerator() && simple2.getDenominator() == simple.getDenominator())
         {
             return true;
         }

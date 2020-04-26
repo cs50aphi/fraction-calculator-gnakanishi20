@@ -72,7 +72,7 @@ public class Fraction
         return finalFraction;
     }
     
-    public Fraction multiply()
+    public Fraction multiply(Fraction obj)
     {
         int denom2 = obj.getDenominator() * denominator;
         int num2 = numerator * obj.getNumerator();
@@ -81,7 +81,7 @@ public class Fraction
         return finalFraction;
     }
     
-    public Fraction divide()
+    public Fraction divide(Fraction obj)
     {
         int num2 = obj.getDenominator() * numerator;
         int denom2 = denominator * obj.getNumerator();
@@ -90,9 +90,13 @@ public class Fraction
         return finalFraction;
     }
     
-    public Fraction equals(Fraction obj)
+    public boolean equals(Fraction obj)
     {
-        
+        if(numerator == obj.getNumerator() && denominator == obj.getDenominator())
+        {
+            return true;
+        }
+        return false;
     }
     
     public void toLowestTerms()

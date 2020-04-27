@@ -5,17 +5,21 @@ public class Fraction
     
     public Fraction(int n, int d)
     {
+        try
+        {
+            int i = n / d;
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("denominator cannot be 0");
+        }
         if(d < 0)
         {
-            n = -n;
-            d = d * -1;
-            numerator = n;
-            denominator = d;
+            numerator = n * -1;
+            denominator = d * -1;
         }
         else if(n < 0 && d < 0)
         {
-            n = +n;
-            d = +d;
             numerator = n * -1;
             denominator = d * -1;
         }
@@ -84,9 +88,7 @@ public class Fraction
     
     public Fraction multiply(Fraction obj)
     {
-        int denom2 = obj.getDenominator() * denominator;
-        int num2 = numerator * obj.getNumerator();
-        Fraction finalFraction = new Fraction(num2, denom2);
+        Fraction finalFraction = new Fraction(numerator * obj.getNumerator(), obj.getDenominator() * denominator);
         finalFraction.toLowestTerms();
         return finalFraction;
     }
@@ -95,16 +97,26 @@ public class Fraction
     {
         int num2 = obj.getDenominator() * numerator;
         int denom2 = denominator * obj.getNumerator();
+        try
+        {
+            int attempt = num2 / denom2;
+        }
+        catch (Exception e)
+        {
+            throw new IllegalArgumentException("denominator cannot be 0");
+        }
         Fraction finalFraction = new Fraction(num2, denom2);
         finalFraction.toLowestTerms();
         return finalFraction;
     }
     
-    public boolean equals(Fraction obj)
+    public boolean equals(Fraction e)
     {
+        Fraction obj = (Fraction) e;
         //makes sure it prints out the real fraction instead of the reduced one
         Fraction simple = new Fraction(obj.getNumerator(), obj.getDenominator());
         simple.toLowestTerms();
+        //makes sure it prints out the real fraction instead of the reduced one
         Fraction simple2 = new Fraction(numerator, denominator);
         simple2.toLowestTerms();
         if(simple2.getNumerator() == simple.getNumerator() && simple2.getDenominator() == simple.getDenominator())
@@ -119,13 +131,14 @@ public class Fraction
         int divide = Math.abs(gcd(numerator, denominator));
         numerator = numerator / divide;
         denominator = denominator / divide;
+        
     }
     
     public static int gcd(int a, int b)
     {
-        if(a % b == 0)
+        if(b == 0)
         {
-            return b;
+            return a;
         }
         return gcd(b, a % b);
     }

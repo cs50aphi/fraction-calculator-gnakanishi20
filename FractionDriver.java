@@ -9,33 +9,38 @@ public class FractionDriver
         while(!stop)
         {
             String opperation = getOperation(kb);
-            Fraction f1 = getFraction(kb);
-            Fraction f2 = getFraction(kb);
+            if(opperation.equals("q") || opperation.equals("Q"))
+            {
+                System.out.println("Goodbye!");
+                stop = true;
+            }
             
             if(opperation.equals("+"))
             {
+                Fraction f1 = getFraction(kb);
+                Fraction f2 = getFraction(kb);
                 System.out.println(f1 + " + " + f2 + " is " + f1.add(f2));
             }
             
             if(opperation.equals("-"))
             {
+                Fraction f1 = getFraction(kb);
+                Fraction f2 = getFraction(kb);
                 System.out.println(f1 + " - " + f2 + " is " + f1.subtract(f2));
             }
             
             if(opperation.equals("*"))
             {
+                Fraction f1 = getFraction(kb);
+                Fraction f2 = getFraction(kb);
                 System.out.println(f1 + " * " + f2 + " is " + f1.multiply(f2));
             }
             
             if(opperation.equals("/"))
             {
+                Fraction f1 = getFraction(kb);
+                Fraction f2 = getFraction(kb);
                 System.out.println(f1 + " / " + f2 + " is " + f1.divide(f2));
-            }
-            
-            if(opperation.equals("q") || opperation.equals("Q"))
-            {
-                System.out.println("Goodbye!");
-                stop = true;
             }
         }
     }
@@ -74,30 +79,33 @@ public class FractionDriver
         System.out.println("Please enter a fraction (a/b) or interger (a):");
         String frac = kb.nextLine();
         boolean valid = validFraction(frac);
-        do
+        if(valid == true)
         {
-            System.out.println("Invalid fraction. Please enter (a/b) or (a) where a and b are integers and b is not zero:");
-            frac = kb.nextLine();
-            valid = validFraction(frac);
-        }
-        while(valid = false);
-        int counter = 0;
-        if(frac.contains("/"))
-        {
-            do
+            int counter = 0;
+            if(frac.contains("/"))
             {
-                counter++;
-            }
-            while(!frac.substring(counter, counter + 1).equals("/"));
-            String num = frac.substring(0, counter);
-            String denom = frac.substring(counter + 1, frac.length());
-            return new Fraction(Integer.parseInt(num), Integer.parseInt(denom));
+                do
+                {
+                    counter++;
+                }
+                while(!frac.substring(counter, counter + 1).equals("/"));
+                
+                String num = frac.substring(0, counter);
+                String denom = frac.substring(counter + 1, frac.length());
+                return new Fraction(Integer.parseInt(num), Integer.parseInt(denom));
 
+            }
+            else
+            {
+                String num = frac;
+                return new Fraction(Integer.parseInt(num));
+            }
         }
         else
         {
-            String num = frac;
-            return new Fraction(Integer.parseInt(num));
+            System.out.println("Invalid fraction. Please enter (a/b) or (a) where a and b are integers and b is not zero:");
+            return getFraction(kb);
         }
+        
     }
 }

@@ -34,7 +34,7 @@ public class Fraction
     public Fraction(int n)
     {
         numerator = n;
-        denominator = 0;
+        denominator = 1;
     }
     
     public Fraction()
